@@ -22,6 +22,7 @@ def sort_words(array):
         sortedwords.append(rev_w)
     return sortedwords
 
+
 def add_word():
     word = input("Type word to add to array: ")
     if word.isdigit():
@@ -31,9 +32,30 @@ def add_word():
     wordarray.append(word)
     check()
 
+
+def remove_word():
+    for i, word in enumerate(wordarray): 
+        print (f"{i+1}: {word}")
+    choice = input("Type number to delete or 'b' to go back: " )
+    if choice.isdigit():
+        try:
+            to_delete = wordarray[int(choice) - 1]
+            print(f"Revmoed {to_delete} from Array")
+            wordarray.remove(to_delete)
+            check()
+        except:
+            print("Not a valid selection")
+            remove_word()
+    elif choice == 'b':
+        check()
+    else:
+        print("Not an int selection")
+        remove_word()
+
+
 def check():
     print(f"Current Words: {wordarray}")
-    cmd = input("Type 'add' to add word, or 'run' to start task ('q' to quit): ")
+    cmd = input("Type 'add' or 'remove' to work with array, or 'run' to start task ('q' to quit): ")
     if cmd == 'run':
         result = sort_words(wordarray)
         print(f"Returned Words: {result}")
@@ -42,8 +64,10 @@ def check():
             check()
         else: 
             print("Thanks for using the word checker!")
-    elif cmd =='add':
+    elif cmd == 'add':
         add_word()
+    elif cmd == 'remove':
+        remove_word()
     elif cmd == 'q':
         print("Thanks for using the word checker!")
     else:
