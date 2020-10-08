@@ -22,9 +22,23 @@ def sort_words(array):
         sortedwords.append(rev_w)
     return sortedwords
 
-result = sort_words(wordarray)
-print(wordarray)
-print(result)
+def command():
+    print(f"Current Words: {wordarray}")
+    return input("Type 'add' to add word, or 'run' to start task ('q' to quit): ")
+
+def check(cmd):
+    if cmd == 'run':
+        result = sort_words(wordarray)
+        print(f"Returned Words: {result}")
+    elif cmd == 'q':
+        print("Thanks for using the word checker!")
+    else:
+        print(f"'{cmd}' not valid entry")
+        new = command()
+        check(new)
+
+cmd = command()
+check(cmd)
 
 """
 This task was more suited to my python skills, resulting in neater code.
