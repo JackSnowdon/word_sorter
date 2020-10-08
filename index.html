@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Task 2 - Working With Strings</h2>
+
+    <p id="start-words"></p>
+
+    <p id="demo"></p>
+
+    <script>
+        const wordarray = ["Hello World", "Bye World", "Gossip World", "Hoss Hell", "Doll Follow Doss"];
+        document.getElementById("start-words").innerHTML = wordarray;
+        let sortedwords = [];
+
+        function sortWord(word) {
+            // Reverses order of words
+            let reversed_word = word.split(/\b/).reverse().join('')
+            let new_word = doubleCheck(reversed_word)
+            sortedwords.push(new_word);
+        }
+
+        function doubleCheck(word) {
+            let last_letter = ""
+            for (let i = word.length - 1; i >= 0; i--) {
+                // Loops through str and returns current letter at index
+                let current_letter = word.charAt(i);
+                if (current_letter == last_letter) {
+                    word = word.replaceAt(i, "**");
+                }
+                last_letter = current_letter;
+            }
+            return word
+        }
+
+        // Replace At takes index and replaces it + 1 index with replacement
+        // this.substr indexs over string and returns new string
+        String.prototype.replaceAt = function(index, replacement) {
+            return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+        }
+
+        // Runs sorting functions for each object in array
+        wordarray.forEach(sortWord)
+        document.getElementById("demo").innerHTML = sortedwords;
+
+        /* 
+        Given the timeframe this is how I've solved the problem faced.
+        To refactor I would refactor using .replace()/.filter() rather than iterate through every char
+        and push from array to array as that can be ineffecient on a larger scale.
+        As far as I'm aware, the english langauge has no words that repeat the same letter more than twice
+        so the doubleCheck function should hold up
+        */
+    </script>
+
+</body>
+
+</html>
